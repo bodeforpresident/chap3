@@ -11,6 +11,8 @@ int main()
     // ask user
     cout << "Enter your guess: \n";
     cin >> userIn;
+
+    // guessing game
     if (randomNum == userIn) {
         cout << "Correct! Attempts: " << attempts;
     }
