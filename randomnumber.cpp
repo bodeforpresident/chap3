@@ -7,30 +7,46 @@ int main()
 	srand(time(0));
 
 	// declare variables
-	int userIn;
+	double userIn;
 	int attempts = 0;
 	int randomNum = rand() % 101;
-
+    
 	// title and introduction
 	cout << "Welcome to the Number Guesser 3000!!!!\n(HOW TO PLAY: Enter a whole number between 1 and 100)\n";
 
 	// ask user
 	cout << "Enter your guess: \n";
 	cin >> userIn;
+	while (!(cin >> userIn)) {  // Keep asking until the user enters a valid number
+    cout << "Invalid input. Try again: ";
+    cin.clear(); // Reset input errors
+    cin.ignore(10000, '\n'); // Remove bad input
+    }
 
-	// incorrect guesses
-	if (randomNum < userIn) do {
-			cout << "Incorrect, try a little lower! Attempts: " << ++attempts << "\n";
-			cin >> userIn;
-		} while (randomNum < userIn);
-	if (randomNum > userIn) do {
-			cout << "Incorrect, try a little higher! Attempts: " << ++attempts << "\n";
-			cin >> userIn;
-		} while (randomNum > userIn);
-
-	// correct guesses
-	if (randomNum == userIn) {
-		cout << "Correct! The number was " << randomNum << "\n You got it in " << ++attempts << " attempts.";
-		return 0;
-	};
+	
+	// loop time loop time
+	while (userIn != randomNum) {
+	    if (userIn > randomNum) {
+	        cout << "Lower. you are at attempt " << ++attempts << ".\n";
+	        cin >> userIn;
+	    } 
+	    if (userIn < randomNum) {
+	        cout << "Higher. you are at attempt " << ++attempts << ".\n";
+	        cin >> userIn;
+	    }
+	    if (!(cin >> userIn)) {  // Keep asking until the user enters a valid number
+        cout << "Invalid input. Try again: ";
+        cin.clear(); // Reset input errors
+        cin.ignore(10000, '\n'); // Remove bad input
+        }
+    ;
+	
+	// exceptions
+	
+	// okay cool time yay you got it right time
+	if  (userIn == randomNum) {
+	    cout << "Correct. Good job. You got the number " << randomNum << " in " << ++attempts << " attempts.";
+	    return 0;
+	}
+}
 }
