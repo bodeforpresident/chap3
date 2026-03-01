@@ -1,52 +1,45 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
-	// generate a new number every time the code runs
+int main() {
+    // generate a new number every time the code runs
 	srand(time(0));
 
-	// declare variables
-	double userIn;
-	int attempts = 0;
-	int randomNum = rand() % 101;
-    
-	// title and introduction
-	cout << "Welcome to the Number Guesser 3000!!!!\n(HOW TO PLAY: Enter a whole number between 1 and 100)\n";
+    // variables
+    double userIn;
+    int attempts = 0;
+    int randNum = rand() % 101;
 
-	// ask user
-	cout << "Enter your guess: \n";
-	cin >> userIn;
-	while (!(cin >> userIn)) {  // Keep asking until the user enters a valid number
-    cout << "Invalid input. Try again: ";
-    cin.clear(); // Reset input errors
-    cin.ignore(10000, '\n'); // Remove bad input
+    // game
+    cout << "Please enter a number between 1 and 100\n";
+    cin >> userIn;
+    while (!userIn) {
+        cout << "Please try again with a number.\n";
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cin >> userIn;
     }
-
-	
-	// loop time loop time
-	while (userIn != randomNum) {
-	    if (userIn > randomNum) {
-	        cout << "Lower. you are at attempt " << ++attempts << ".\n";
-	        cin >> userIn;
-	    } 
-	    if (userIn < randomNum) {
-	        cout << "Higher. you are at attempt " << ++attempts << ".\n";
-	        cin >> userIn;
-	    }
-	    if (!(cin >> userIn)) {  // Keep asking until the user enters a valid number
-        cout << "Invalid input. Try again: ";
-        cin.clear(); // Reset input errors
-        cin.ignore(10000, '\n'); // Remove bad input
+    while (userIn < 1 || userIn > 100) {
+        cout << "Please try again with a number 1 and 100.\n";
+        cin.clear();
+        cin.ignore(10000, '\n');
+        cin >> userIn;
+    }
+    while (userIn != randNum) {
+        if (userIn < randNum) {
+            cout << "Incorrect, higher\n";
+            cin >> userIn;
+            ++attempts;
         }
-    ;
-	
-	// exceptions
-	
-	// okay cool time yay you got it right time
-	if  (userIn == randomNum) {
-	    cout << "Correct. Good job. You got the number " << randomNum << " in " << ++attempts << " attempts.";
-	    return 0;
-	}
-}
+        if (userIn > randNum) {
+            cout << "Incorrect, lower\n";
+            cin >> userIn;
+            ++attempts;
+        }
+    }
+    if (userIn = randNum) {
+        ++attempts;
+        cout << "Correct! The number was " << randNum << ". It took you " << attempts << " attempts to guess it.";
+        return 0;
+    }
 }
